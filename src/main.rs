@@ -15,12 +15,15 @@ pub struct GamePlugin;
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(Startup, (setup, create_map));
-        // app.add_systems(Update);
+        app.add_systems(Update, handle_inputs);
     }
 }
 
 #[derive(Component)]
 pub struct GameTile;
+
+// TODO - process player input events to move block and camera around
+fn handle_inputs() {}
 
 fn create_map(
     mut commands: Commands,
@@ -73,6 +76,6 @@ fn setup(
     // camera
     commands.spawn((
         Camera3d::default(),
-        Transform::from_xyz(-2.5, 4.5, 9.0).looking_at(Vec3::ZERO, Vec3::Y),
+        Transform::from_xyz(0.0, -3.0, 9.0).looking_at(Vec3::ZERO, Vec3::Y),
     ));
 }
